@@ -7,10 +7,10 @@ node
 //def RUN_ARTIFACT_DIR="tests/${BUILD_NUMBER}"
 def SFDC_USERNAME="JenkinsPDO@scratchorg.com"
 
-def HUB_ORG="farooq.dev78@popcornapps.com"
+def HUB_ORG=env.HUB_ORG_DH
 def SFDC_HOST = env.SFDC_HOST_DH
 def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-def CONNECTED_APP_CONSUMER_KEY="3MVG9Kip4IKAZQEUYMneO6e7iZpV2EHfIu.Ou3iARTfqhbF.w8_mY.TM2_AaRE4EXnYlZo9yG_gP8HK3.PX9l"
+def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
 
 println 'KEY IS' 
 println JWT_KEY_CRED_ID
@@ -30,7 +30,7 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
          {
 
              removeOrg=bat returnStatus: true, script: "\"${toolbelt}\" force:auth:logout -u ${HUB_ORG} -p"
-             rc = bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
+             rc = bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile \"${jwt_key_file}\" --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
             if (rc != 0)
             {
               error 'hub org authorization failed' 
