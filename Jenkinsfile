@@ -52,7 +52,7 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
         }
         stage('Retrive Data from scratch Org')
         {
-             vk=bat returnStatus: true, script: "\"${toolbelt}\" force:source:retrieve -m CustomTab,CustomApplication,PermissionSet,CustomLabels,CustomObject -u ${SFDC_USERNAME}"
+             vk=bat returnStatus: true, script: "\"${toolbelt}\" force:source:retrieve -m ApexClass -u ${SFDC_USERNAME}"
              if(vk != 0)
              {
                 error 'not retrived'
