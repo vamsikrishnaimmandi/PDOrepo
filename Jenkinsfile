@@ -62,9 +62,6 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
         stage('push to dev org')
         {
             
-            //rs=bat returnStatus: true, script: "\"${toolbelt}\" force:config:set defaultusername=${SFDC_USERNAME}"
-            list= bat returnStatus: true, script: "\"${toolbelt}\" force:org:list"
-            //rc = bat returnStatus: true, script: "\"${toolbelt}\" force:source:push --targetusername ${SFDC_USERNAME}"
              rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
             list= bat returnStatus: true, script: "\"${toolbelt}\" force:org:open -u ${SFDC_USERNAME}"
         }
