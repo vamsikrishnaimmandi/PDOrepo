@@ -15,11 +15,6 @@
   <types>
         <members>Test</members>
         <name>ApexClass</name>
-<<<<<<< HEAD
-    </types>
-=======
-
-   </types>
->>>>>>> 604734334930467f8b82fe06ed802a4dc786777e
+        </types>
     <version>47.0</version>
 </Package>
