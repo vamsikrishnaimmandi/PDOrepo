@@ -8,10 +8,7 @@
         <members>ContactsData</members>
         <name>ApexClass</name>
  </types>
- <types>
-        <members>LWC_Cmp</members>
-        <name>CustomTab</name>
-  </types>
+
   <types>
         <members>Test</members>
         <name>ApexClass</name>
