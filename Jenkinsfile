@@ -11,14 +11,16 @@ def HUB_ORG=env.HUB_ORG_DH
 def SFDC_HOST = env.SFDC_HOST_DH
 def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
 def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
-def PDO_USER="farooq.dev78@popcornapps.com"
-def CLIENT_ID="3MVG9Kip4IKAZQEUYMneO6e7iZpV2EHfIu.Ou3iARTfqhbF.w8_mY.TM2_AaRE4EXnYlZo9yG_gP8HK3.PX9l"
+def PDO_USER=env.PDO_USER
+def CLIENT_ID=env.CLIENT_ID
 
 println 'KEY IS' 
 println JWT_KEY_CRED_ID
 println HUB_ORG
 println SFDC_HOST
 println CONNECTED_APP_CONSUMER_KEY
+println CLIENT_ID
+println PDO_USER
 def toolbelt = tool 'toolbelt'
 
 stage('checkout source')
@@ -51,7 +53,11 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
                 rs=bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --jwtkeyfile \"${jwt_key_file}\" --username ${SFDC_USERNAME} --instanceurl https://test.salesforce.com --setdefaultusername"
                 rc=bat returnStatus: true, script: "\"${toolbelt}\" force:user:password:generate --targetusername ${SFDC_USERNAME}"
                 rS=bat returnStatus: true, script: "\"${toolbelt}\" force:user:display --targetusername ${SFDC_USERNAME}"
+<<<<<<< HEAD
                 if (rc != 0)
+=======
+              if (rc != 0)
+>>>>>>> 604734334930467f8b82fe06ed802a4dc786777e
             {
               error 'Password Not Created' 
             }
@@ -59,7 +65,7 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
         }
         stage('Retrive Data from scratch Org')
         {
-             vk=bat returnStatus: true, script: "\"${toolbelt}\" force:source:retrieve -m ApexClass:ContactsData,LightningComponentBundle:displayComponent,CustomTab:LWC_Cmp -u ${SFDC_USERNAME}"
+             vk=bat returnStatus: true, script: "\"${toolbelt}\" force:source:retrieve -x manifest/package.xml -u ${SFDC_USERNAME}"
              if(vk != 0)
              {
                 error 'not retrived'
@@ -70,8 +76,13 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
         {
             
              rmsg = bat returnStatus: true, script: "\"${toolbelt}\" force:source:deploy -x manifest/package.xml -u ${PDO_USER}"
+<<<<<<< HEAD
                          list= bat returnStatus: true, script: "\"${toolbelt}\" force:org:open -u ${SFDC_USERNAME}"
               if (rmsg != 0)
+=======
+            list= bat returnStatus: true, script: "\"${toolbelt}\" force:org:open -u ${SFDC_USERNAME}"
+             if (rmsg != 0)
+>>>>>>> 604734334930467f8b82fe06ed802a4dc786777e
             {
               error 'Deployment Failed' 
             }
