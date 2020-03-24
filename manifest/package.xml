@@ -4,18 +4,19 @@
 <types>
         <members>displayComponent</members>
         <name>LightningComponentBundle</name>
-    </types>
+</types>
 <types>
         <members>ContactsData</members>
         <name>ApexClass</name>
-    </types>
-    <types>
+ </types>
+ <types>
         <members>LWC_Cmp</members>
         <name>CustomTab</name>
-    <types>
+  </types>
+  <types>
         <members>Test</members>
         <name>ApexClass</name>
 
-    </types>
+   </types>
     <version>47.0</version>
 </Package>
