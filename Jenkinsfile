@@ -51,6 +51,10 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
                 rs=bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --jwtkeyfile \"${jwt_key_file}\" --username ${SFDC_USERNAME} --instanceurl https://test.salesforce.com --setdefaultusername"
                 rc=bat returnStatus: true, script: "\"${toolbelt}\" force:user:password:generate --targetusername ${SFDC_USERNAME}"
                 rS=bat returnStatus: true, script: "\"${toolbelt}\" force:user:display --targetusername ${SFDC_USERNAME}"
+              if (rc != 0)
+            {
+              error 'Password Not Created' 
+            }
 
         }
         stage('Retrive Data from scratch Org')
@@ -67,6 +71,10 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
             
              rmsg = bat returnStatus: true, script: "\"${toolbelt}\" force:source:deploy -x manifest/package.xml -u ${PDO_USER}"
             list= bat returnStatus: true, script: "\"${toolbelt}\" force:org:open -u ${SFDC_USERNAME}"
+             if (rmsg != 0)
+            {
+              error 'Deployment Failed' 
+            }
         }
         stage('logging out Orgs')
         {
