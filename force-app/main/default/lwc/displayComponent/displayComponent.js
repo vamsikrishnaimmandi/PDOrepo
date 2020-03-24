@@ -56,7 +56,7 @@ constructor()
     super();
     this.handelonload(this.selectedItemValue,this.key);
 }
-//Whole DataTable process
+//Whole DataTable process//
 Handelmainload(result)
 {
     window.console.log(result);
