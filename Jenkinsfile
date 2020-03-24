@@ -11,14 +11,16 @@ def HUB_ORG=env.HUB_ORG_DH
 def SFDC_HOST = env.SFDC_HOST_DH
 def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
 def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
-def PDO_USER="farooq.dev78@popcornapps.com"
-def CLIENT_ID="3MVG9Kip4IKAZQEUYMneO6e7iZpV2EHfIu.Ou3iARTfqhbF.w8_mY.TM2_AaRE4EXnYlZo9yG_gP8HK3.PX9l"
+def PDO_USER=env.PDO_USER
+def CLIENT_ID=env.CLIENT_ID
 
 println 'KEY IS' 
 println JWT_KEY_CRED_ID
 println HUB_ORG
 println SFDC_HOST
 println CONNECTED_APP_CONSUMER_KEY
+println CLIENT_ID
+println PDO_USER
 def toolbelt = tool 'toolbelt'
 
 stage('checkout source')
