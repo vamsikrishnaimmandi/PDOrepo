@@ -53,11 +53,8 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
                 rs=bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --jwtkeyfile \"${jwt_key_file}\" --username ${SFDC_USERNAME} --instanceurl https://test.salesforce.com --setdefaultusername"
                 rc=bat returnStatus: true, script: "\"${toolbelt}\" force:user:password:generate --targetusername ${SFDC_USERNAME}"
                 rS=bat returnStatus: true, script: "\"${toolbelt}\" force:user:display --targetusername ${SFDC_USERNAME}"
-<<<<<<< HEAD
-                if (rc != 0)
-=======
               if (rc != 0)
->>>>>>> 604734334930467f8b82fe06ed802a4dc786777e
+
             {
               error 'Password Not Created' 
             }
@@ -76,13 +73,10 @@ withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]
         {
             
              rmsg = bat returnStatus: true, script: "\"${toolbelt}\" force:source:deploy -x manifest/package.xml -u ${PDO_USER}"
-<<<<<<< HEAD
                          list= bat returnStatus: true, script: "\"${toolbelt}\" force:org:open -u ${SFDC_USERNAME}"
               if (rmsg != 0)
-=======
             list= bat returnStatus: true, script: "\"${toolbelt}\" force:org:open -u ${SFDC_USERNAME}"
              if (rmsg != 0)
->>>>>>> 604734334930467f8b82fe06ed802a4dc786777e
             {
               error 'Deployment Failed' 
             }
